@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="https://unpkg.com/@pqina/flip/dist/flip.min.css" rel="stylesheet">
+<script src="https://unpkg.com/@pqina/flip/dist/flip.min.js"></script>
+
+	<style>
+.tick {
+  font-size:1rem; white-space:nowrap; font-family:arial,sans-serif;
+  max-height: 100px;
+}
+
+.tick-flip,.tick-text-inline {
+  font-size:2.5em;
+}
+
+.tick-label {
+  margin-top:1em;font-size:1em;
+}
+
+.tick-char {
+  width:1.5em;
+}
+
+.tick-text-inline {
+  display:inline-block;text-align:center;min-width:1em;
+}
+
+.tick-text-inline+.tick-text-inline {
+  margin-left:-.325em;
+}
+
+.tick-group {
+  margin:0 .5em;text-align:center;
+}
+
+body {
+   background-color: #fff !important; 
+}
+
+.tick-text-inline {
+   color: #595d63 !important; 
+}
+
+.tick-label {
+   color: #595d63 !important; 
+}
+
+.tick-flip-panel {
+   color: #fff !important; 
+}
+
+.tick-flip {
+   font-family: !important; 
+}
+
+.tick-flip-panel-text-wrapper {
+   line-height: 1.45 !important; 
+}
+
+.tick-flip-panel {
+   background-color: #3c3e3c !important; 
+}
+
+.tick-flip {
+   border-radius:0.12em !important; 
+}
+</style>
+
+</head>
+<body>
+<div class="tick" data-did-init="handleTickInit">
+
+    <span data-layout="horizontal fit">
+
+        <span data-repeat="true" data-value="001" data-transform="pad(00)">
+
+            <span data-view="flip"></span>
+
+        </span>
+
+    </span>
+
+</div>
+</body>
+</html>
+
+
+
+
+<script>
+
+	function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+    function handleTickInit(tick) {
+
+        // update the value every 5 seconds
+        var interval = Tick.helper.duration(1, 'seconds');
+
+        // offset is a fixed date in the past
+        var dateOffset = Tick.helper.date('2019-01-01');
+
+        // value to start with, the value of the counter at the offset date
+        var valueOffset = 0;
+
+        // uncomment lines below (and comment line above) if you want offset be set to the first time the user visited the page
+        // var offset = parseInt(localStorage.getItem('tick-value-counter-offset') || Date.now(), 10);
+        // localStorage.setItem('tick-value-counter-offset', offset);
+
+        // start updating the counter each second
+        Tick.helper.interval(function () {
+            valueOffset += 1
+            tick.value = pad(valueOffset,3) ;
+
+        }, 1000);
+    }
+</script>
